@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiarioÁguila</title>
+    <script src="index.js"></script> <!-- Aquí va el link a tu archivo JS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-align: center;
+            background-color: #1f3b70; /* Fondo azul */
+        }
+        header {
+            background: #000000; /* Barra superior de color negro */
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        header img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+        nav {
+            background: linear-gradient(to bottom, rgba(255, 215, 0, 0.7), rgba(255, 215, 0, 1)); /* Degradado amarillo */
+            padding: 10px;
+        }
+        nav button {
+            background: #1f3b70;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .menu {
+            display: none;
+            background: #ffd700;
+            padding: 10px;
+        }
+        .menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .menu a:hover {
+            background: #1f3b70;
+            color: white;
+        }
+        .section {
+            padding: 20px;
+            background-image: url('Escudos/fondo.png'); /* Fondo de la página */
+            background-size: cover;
+            background-position: center;
+        }
+        table {
+            width: auto;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: white;
+            color: #1f3b70; /* Texto en color azul */
+        }
+        th, td {
+            border: 1px solid #000000; /* Borde negro */
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #000000; /* Fila de la cabecera en negro */
+            color: white; /* Texto de la cabecera en blanco */
+        }
+        .escudo {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin: 0 10px;
+        }
+        .noticia {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            border: 3px solid black;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: left;
+        }
+        .noticia img {
+            width: 250px;
+            height: 150px;
+            margin-right: 20px;
+        }
+        .noticia p {
+            text-align: justify;
+            color: black; /* Cambiado a color negro */
+        }
+        .noticia h4 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: black; /* Cambiado a color negro */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                font-size: 20px;
+            }
+            nav button {
+                display: block;
+                width: 100%;
+                font-size: 18px;
+            }
+            .menu {
+                display: block;
+                text-align: center;
+                margin-top: 10px;
+            }
+            .menu a {
+                display: inline-block;
+                padding: 15px;
+                width: 100%;
+                font-size: 18px;
+            }
+            .noticia {
+                width: 90%;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .noticia img {
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+            .section {
+                padding: 10px;
+            }
+            table {
+                width: 100%;
+                font-size: 14px;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+
+        /* Para tablet y dispositivos más grandes */
+        @media (min-width: 768px) {
+            .menu {
+                display: flex;
+                justify-content: center;
+            }
+            .menu a {
+                margin: 0 15px;
+                display: inline-block;
+            }
+            nav button {
+                display: none;
+            }
+        }
+
+    </style>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo de DiarioÁguila">
+        <span>DiarioÁguila</span>
+    </header>
+    <nav>
+        <button onclick="toggleMenu()">Menú</button>
+        <div id="menu" class="menu">
+            <a href="#inicio">Inicio</a>
+            <a href="#noticias">Noticias</a>
+            <a href="#partidos">Partidos</a>
+            <a href="#estadisticas">Estadísticas</a> <!-- Nuevo botón -->
+            <a href="#campeonatos">Campeonatos</a> <!-- Nuevo botón -->
+            <a href="#contactanos">Contáctanos</a> <!-- Nuevo botón -->
+        </div>
+    </nav>
+
+    <!-- Sección de Noticias -->
+    <div id="noticias" class="section">
+        <h3>Últimas Noticias</h3>
+
+        <div class="noticia">
+            <img src="Escudos/diegovaldez.png" alt="Diego Valdés">
+            <div>
+                <h4>Diego Valdés se queda en el América tras rechazar oferta del Toluca</h4>
+                <p>Finalmente, Diego Valdés continuará con el Club América, luego de que en las últimas horas se especulara sobre su posible fichaje por Toluca. El mediocampista chileno ha decidido rechazar la oferta de los Diablos Rojos y seguirá en el cuadro azulcrema.</p>
+                <p>A pesar de que la dirigencia de las Águilas estaba dispuesta a cederlo en préstamo, la negociación con Toluca no prosperó, y Valdés ha optado por quedarse en el equipo.</p>
+                <p>El futuro del volante chileno estuvo en la mira durante este mercado invernal, al igual que el de Richard Sánchez, pero por ahora, la situación de Valdés está resuelta. En cuanto al paraguayo, los rumores sobre su salida a Racing de Argentina siguen circulando, aunque todo indica que se quedará en el América.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Partidos -->
+    <div id="partidos" class="section">
+        <h3>Partidos</h3>
+        <table>
+            <tr>
+                <th>Fecha</th>
+                <th>Partido</th>
+                <th>Resultado</th>
+            </tr>
+            <tr>
+                <td>10/01/2025</td>
+                <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Querétaro <img class="escudo" src="Escudos/queretaro.png" alt="Querétaro"></td>
+                <td>1 - 0</td>
+            </tr>
+            <tr>
+                <td>18/01/2025</td>
+                <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Tijuana <img class="escudo" src="Escudos/tijuana.png" alt="Tijuana"></td>
+                <td>1 - 1</td>
+            </tr>
+            <tr>
+                <td>25/01/2025</td>
+                <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Santos <img class="escudo" src="Escudos/santos.png" alt="Santos"></td>
+                <td>4 - 1</td>
+            </tr>
+            <tr>
+                <td>28/01/2025</td>
+                <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Atlético San Luis <img class="escudo" src="Escudos/Atlético San Luis.png" alt="Atlético San Luis"></td>
+                <td>3 - 0</td>
+            </tr>
+            <tr>
+                <td>01/02/2025</td>
+                <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Juárez <img class="escudo" src="Escudos/juarez.png" alt="Juárez"></td>
+                <td>4 - 0</td>
+            </tr>
+            <tr>
+                <td>07/02/2025</td>
+                <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Puebla <img class="escudo" src="Escudos/puebla.png" alt="Puebla"></td>
+                <td>Por jugar</td>
+            </tr>
+            <tr>
+                <td>11/02/2025</td>
+                <td><img class="escudo"src="Escudos/america.png" alt="América"> América vs LAFC <img class="escudo" src="Escudos/lafc.png" alt="LAFC"></td>
+                <td>Por jugar</td>
+            </tr>
+            <tr>
+                <td>14/02/2025</td>
+                <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Necaxa <img class="escudo" src="Escudos/necaxa.png" alt="Necaxa"></td>
+                <td>Por jugar</td>
+            </tr>
+            <tr>
+                <td>11/02/2025</td>
+                <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs León <img class="escudo" src="Escudos/León.png" alt="León"></td>
+                <td>Por jugar</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Sección de Estadísticas -->
+    <div id="estadisticas" class="section">
+        <h3>Estadísticas</h3>
+        <!-- Aquí puedes agregar contenido relacionado con estadísticas -->
+    </div>
+
+    <!-- Sección de Campeonatos -->
+    <div id="campeonatos" class="section">
+        <h3>Campeonatos</h3>
+        <!-- Sección de Campeonatos -->
+    <div id="campeonatos" class="section">
+    <!-- Tabla para Liga MX -->
+    <h4>Liga MX</h4>
+    <table>
+        <tr>
+            <th>Año</th>
+            <th>Torneo</th>
+            <th>Partido</th>
+        </tr>
+        <tr>
+            <td>1965-66</td>
+            <td>Liga MX</td>
+            <td>Torneo largo</td>
+        </tr>
+        <tr>
+            <td>1970-71</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Toluca <img class="escudo" src="Escudos/Toluca.png" alt="Toluca"></td>
+        </tr>
+        <tr>
+            <td>1975-76</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs UDG <img class="escudo" src="Escudos/UDG.png" alt="UDG"></td>
+        </tr>
+        <tr>
+            <td>1983-84</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Chivas <img class="escudo" src="Escudos/Chivas.png" alt="Chivas"></td>
+        </tr>
+        <tr>
+            <td>1984-85</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Pumas <img class="escudo" src="Escudos/pumas.png" alt="pumas"></td>
+        </tr>
+        <tr>
+            <td>PRODE 1985</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs T.Madero <img class="escudo" src="Escudos/tampico.png" alt="tampico"></td>
+        </tr>
+        <tr>
+            <td>1987-88</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Pumas <img class="escudo" src="Escudos/pumas.png" alt="pumas"></td>
+        </tr>
+        <tr>
+            <td>1988-89</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Cruz azul <img class="escudo" src="Escudos/cruzazul.png" alt="cruzazul"></td>
+        </tr>
+        <tr>
+            <td>Verano 2002</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Necaxa<img class="escudo" src="Escudos/necaxa.png" alt="necaxa"></td>
+        </tr>
+        <tr>
+            <td>Clausura 2005</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Tecos<img class="escudo" src="Escudos/tecos.png" alt="tecos"></td>>
+        </tr>
+        <tr>
+            <td>Clausura 2013</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Cruz Azul<img class="escudo" src="Escudos/cruzazul.png" alt="cruzazul"></td>
+        </tr>
+        <tr>
+            <td>Apertura 2014</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Tigres<img class="escudo" src="Escudos/tigres.png" alt="tigres"></td>
+        </tr>
+        <tr>
+            <td>Apertura 2018</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Cruz Azul<img class="escudo" src="Escudos/cruzazul.png" alt="cruzazul"></td>
+        </tr>
+        <tr>
+            <td>Apertura 2023</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Tigres<img class="escudo" src="Escudos/tigres.png" alt="tigres"></td>
+        </tr>
+        <tr>
+            <td>Clausura 2024</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Cruz Azul<img class="escudo" src="Escudos/cruzazul.png" alt="cruzazul"></td>
+        </tr>
+        <tr>
+            <td>Apertura 2024</td>
+            <td>Liga MX</td>
+            <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Monterrey<img class="escudo" src="Escudos/monterrey.png" alt="monterrey"></td>
+        </tr>
+        <tr>
+            <th>Año</th>
+            <th>Torneo</th>
+            <th>Partido</th>
+        </tr>
+        <tr>
+            <td>1954-55</td>
+            <td>Campeón de Campeones</td>
+            <td>América vs [Rival] - 2 - 1</td>
+        </tr>
+        <tr>
+            <td>1975-76</td>
+            <td>Campeón de Campeones</td>
+            <td>América vs [Rival] - 3 - 2</td>
+        </tr>
+        <tr>
+            <td>1987-88</td>
+            <td>Campeón de Campeones</td>
+            <td>América vs [Rival] - 1 - 0</td>
+        </tr>
+        <tr>
+            <td>1988-89</td>
+            <td>Campeón de Campeones</td>
+            <td>América vs [Rival] - 3 - 1</td>
+        </tr>
+        <tr>
+            <td>2004-05</td>
+            <td>Campeón de Campeones</td>
+            <td>América vs [Rival] - 4 - 2</td>
+        </tr>
+        <tr>
+            <td>2018-2019</td>
+            <td>Campeón de Campeones</td>
+            <td>América vs [Rival] - 2 - 1</td>
+        </tr>
+        <tr>
+            <td>2023-2024</td>
+            <td>Campeón de Campeones</td>
+            <td>América vs [Rival] - 3 - 0</td>
+        </tr>
+        <tr>
+            <th>Año</th>
+            <th>Torneo</th>
+            <th>Partido</th>
+        </tr>
+        <tr>
+            <td>1953-54</td>
+            <td>Copa MX</td>
+            <td>América vs [Rival] - 2 - 0</td>
+        </tr>
+        <tr>
+            <td>1954-55</td>
+            <td>Copa MX</td>
+            <td>América vs [Rival] - 1 - 0</td>
+        </tr>
+        <tr>
+            <td>1963-64</td>
+            <td>Copa MX</td>
+            <td>América vs [Rival] - 3 - 2</td>
+        </tr>
+        <tr>
+            <td>1964-65</td>
+            <td>Copa MX</td>
+            <td>América vs [Rival] - 4 - 1</td>
+        </tr>
+        <tr>
+            <td>1973-74</td>
+            <td>Copa MX</td>
+            <td>América vs [Rival] - 2 - 1</td>
+        </tr>
+        <tr>
+            <td>Clausura 2019</td>
+            <td>Copa MX</td>
+            <td>América vs [Rival] - 3 - 0</td>
+        </tr>
+        <tr>
+            <th>Año</th>
+            <th>Torneo</th>
+            <th>Partido</th>
+        </tr>
+        <tr>
+            <td>2024</td>
+            <td>Supercopa de la Liga MX</td>
+            <td>América vs [Rival] - 2 - 1</td>
+        </tr>
+        <tr>
+            <th>Año</th>
+            <th>Torneo</th>
+            <th>Partido</th>
+        </tr>
+        <tr>
+            <td>1977</td>
+            <td>Concachampions</td>
+            <td>América vs [Rival] - 3 - 1</td>
+        </tr>
+        <tr>
+            <td>1987</td>
+            <td>Concachampions</td>
+            <td>América vs [Rival] - 2 - 0</td>
+        </tr>
+        <tr>
+            <td>1990</td>
+            <td>Concachampions</td>
+            <td>América vs [Rival] - 4 - 1</td>
+        </tr>
+        <tr>
+            <td>1992</td>
+            <td>Concachampions</td>
+            <td>América vs [Rival] - 2 - 0</td>
+        </tr>
+        <tr>
+            <td>2006</td>
+            <td>Concachampions</td>
+            <td>América vs [Rival] - 2 - 1</td>
+        </tr>
+        <tr>
+            <td>2014-15</td>
+            <td>Concachampions</td>
+            <td>América vs [Rival] - 3 - 1</td>
+        </tr>
+        <tr>
+            <td>2015-16</td>
+            <td>Concachampions</td>
+            <td>América vs [Rival] - 2 - 1</td>
+        </tr>
+        <tr>
+            <th>Año</th>
+            <th>Torneo</th>
+            <th>Partido</th>
+        </tr>
+        <tr>
+            <td>1978</td>
+            <td>Copa Interamericana</td>
+            <td>América vs [Rival] - 3 - 1</td>
+        </tr>
+        <tr>
+            <td>1991</td>
+            <td>Copa Interamericana</td>
+            <td>América vs [Rival] - 2 - 0</td>
+        </tr>
+        <tr>
+            <th>Año</th>
+            <th>Torneo</th>
+            <th>Partido</th>
+        </tr>
+        <tr>
+            <td>2024</td>
+            <td>Campeones Cup</td>
+            <td>América vs [Rival] - 2 - 1</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+
