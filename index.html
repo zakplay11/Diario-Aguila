@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DiarioÁguila</title>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -83,9 +86,11 @@
             vertical-align: middle;
             margin: 0 10px;
         }
+        
+        /* Estilo de las noticias */
         .noticia {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             background-color: white;
             border: 3px solid black;
@@ -109,14 +114,15 @@
             margin-bottom: 15px;
             color: black; /* Cambiado a color negro */
         }
-        
+
         /* Fondo negro a los títulos de las secciones */
         .section h3 {
             background-color: #000000; /* Fondo negro */
             color: white; /* Texto en blanco */
             padding: 5px 10px; /* O incluso más pequeño */
-            margin: 20; 
+            margin: 20px;
             display: inline-block;
+            text-align: center; /* Centra el título */
         }
 
         /* Responsive Design */
@@ -177,6 +183,29 @@
             }
         }
 
+        /* Estilo para el botón de regresar al inicio */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0056b3;
+            color: yellow;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px; /* Aumentamos el tamaño del ícono */
+            display: none; /* Inicialmente oculto */
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000; /* Asegurarnos de que esté por encima de otros elementos */
+        }
+
+        #back-to-top:hover {
+            background-color: #007bff;
+        }
+
     </style>
     <script>
         function toggleMenu() {
@@ -187,6 +216,25 @@
                 menu.style.display = 'none';
             }
         }
+
+        // Función para desplazar la página hacia arriba
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mostrar el botón solo cuando se hace scroll hacia abajo
+        window.onscroll = function() {
+            let button = document.getElementById("back-to-top");
+            // Verificamos si se hace scroll hacia abajo más de 100px
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.style.display = "block"; // Mostramos el botón
+            } else {
+                button.style.display = "none"; // Ocultamos el botón
+            }
+        };
     </script>
 </head>
 <body>
@@ -197,33 +245,61 @@
     <nav>
         <button onclick="toggleMenu()">Menú</button>
         <div id="menu" class="menu">
-            <a href="#inicio">Inicio</a>
-            <a href="#noticias">Noticias</a>
-            <a href="#partidos">Partidos</a>
+            <a href="#inicio">Inicio</a> <!-- Nuevo botón -->
+            <a href="#noticias">Noticias</a> <!-- Nuevo botón -->
+            <a href="#temporadaactual">Temporada actual</a> <!-- Nuevo botón -->
             <a href="#estadisticas">Estadísticas</a> <!-- Nuevo botón -->
             <a href="#campeonatos">Campeonatos</a> <!-- Nuevo botón -->
             <a href="#contactanos">Contáctanos</a> <!-- Nuevo botón -->
         </div>
     </nav>
 
+    <!-- Botón de Regreso al Inicio -->
+    <button id="back-to-top" class="back-to-top" onclick="scrollToTop()">↑</button>
+
     <!-- Sección de Noticias -->
     <div id="noticias" class="section">
         <h3>Últimas Noticias</h3>
 
+        <!-- primer noticia -->
         <div class="noticia">
-            <img src="Escudos/diegovaldez.png" alt="Diego Valdés">
+            <img src="Escudos/jornada4.png" alt="Imagen de las Águilas en partido contra Juárez" />
+            <div>
+                <h4>¡Victoria en casa! Las Águilas dominan a Juárez</h4>
+                <p>
+                    En una gran exhibición de fútbol, las Águilas superaron a Juárez en la fecha 4 del torneo, logrando su cuarta victoria consecutiva. El equipo sigue invicto, con 13 puntos de 15 posibles, y se mantiene firme en lo más alto de la tabla. ¡El camino hacia la 17 sigue más cerca que nunca!
+                </p>
+            </div>
+        </div>
+
+        <!-- segunda noticia sobre Valdez -->
+        <div class="noticia">
+            <img src="Escudos/diegovaldez.png" alt="Diego Valdés" />
             <div>
                 <h4>Diego Valdés se queda en el América tras rechazar oferta del Toluca</h4>
-                <p>Finalmente, Diego Valdés continuará con el Club América, luego de que en las últimas horas se especulara sobre su posible fichaje por Toluca. El mediocampista chileno ha decidido rechazar la oferta de los Diablos Rojos y seguirá en el cuadro azulcrema.</p>
-                <p>A pesar de que la dirigencia de las Águilas estaba dispuesta a cederlo en préstamo, la negociación con Toluca no prosperó, y Valdés ha optado por quedarse en el equipo.</p>
-                <p>El futuro del volante chileno estuvo en la mira durante este mercado invernal, al igual que el de Richard Sánchez, pero por ahora, la situación de Valdés está resuelta. En cuanto al paraguayo, los rumores sobre su salida a Racing de Argentina siguen circulando, aunque todo indica que se quedará en el América.</p>
+                <p>
+                    Finalmente, Diego Valdés continuará con el Club América, luego de que en las últimas horas se especulara sobre su posible fichaje por Toluca. El mediocampista chileno ha decidido rechazar la oferta de los Diablos Rojos y seguirá en el cuadro azulcrema.
+                </p>
+                <p>
+                    A pesar de que la dirigencia de las Águilas estaba dispuesta a cederlo en préstamo, la negociación con Toluca no prosperó, y Valdés ha optado por quedarse en el equipo.
+                </p>
+                <p>
+                    El futuro del volante chileno estuvo en la mira durante este mercado invernal, al igual que el de Richard Sánchez, pero por ahora, la situación de Valdés está resuelta. En cuanto al paraguayo, los rumores sobre su salida a Racing de Argentina siguen circulando, aunque todo indica que se quedará en el América.
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- Sección de Partidos -->
-    <div id="partidos" class="section">
-        <h3>Partidos</h3>
+</body>
+</html>
+
+    <!-- Sección de Temporada actual -->
+    <div id="temporadaactual" class="section">
+        <h3>Temporada actual</h3>
+
+        <!-- Aquí unificamos la información de Partidos, Estadísticas y Tabla General -->
+        <!-- Sección de Partidos -->
+        <h4>Partidos</h4>
         <table>
             <tr>
                 <th>Fecha</th>
@@ -248,9 +324,9 @@
             <tr>
                 <td>28/01/2025</td>
                 <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Atlético San Luis <img class="escudo" src="Escudos/Atlético San Luis.png" alt="Atlético San Luis"></td>
-                <td>3 - 0</td>
+                <td>3 - 1</td>
             </tr>
-        <tr>
+            <tr>
                 <td>01/02/2025</td>
                 <td><img class="escudo" src="Escudos/america.png" alt="América"> América vs Juárez <img class="escudo" src="Escudos/juarez.png" alt="Juárez"></td>
                 <td>4 - 0</td>
@@ -534,3 +610,4 @@
 
             </table>
     
+
